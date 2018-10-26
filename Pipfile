@@ -9,6 +9,7 @@ mpmath = "*"
 [dev-packages]
 pycodestyle = "*"
 "autopep8" = "*"
+twine = "*"
 
 [requires]
 python_version = "3"
