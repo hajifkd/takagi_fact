@@ -3,6 +3,10 @@ from mpmath import mp
 EPS = 1e-10
 
 
+def approx_eq(a, b):
+    return EPS > a - b > -EPS
+
+
 def symmetric_svd(a):
     # Here we implicitly assume a is symmetric.
     A = mp.matrix(a)
@@ -28,8 +32,18 @@ def symmetric_svd(a):
     vs = []
 
     for vQ in Qmat:
-        if all(abs(abs(vQ[n]) - abs(v[0])) > EPS for v in vs):
+        if all(
+                # Requiring linear independence
+                not all(
+                    (approx_eq(vQ[n + i], v[i]) and approx_eq(vQ[i], -v[n + i])) or
+                        (approx_eq(vQ[n + i], -v[i]) and approx_eq(vQ[i], v[n + i]))
+                    for i in range(n)
+                    )
+                for v in vs
+              ):
             vs.append(vQ)
+
+    assert(len(vs) == n)
 
     for i in range(n):
         for j in range(n):
