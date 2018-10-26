@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="takagi_fact",
-    version="0.0.1",
+    version="0.1.2",
     author="Hajime Fukuda",
     author_email="hajime.fukuda@me.com",
     description="A libary for the symmetric SVD and the Takagi factorization",
@@ -18,4 +18,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
+    install_requires=[
+        'mpmath',
+    ]
 )
