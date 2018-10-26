@@ -1,5 +1,7 @@
 from mpmath import mp
 
+EPS = 1e-10
+
 
 def symmetric_svd(a):
     # Here we implicitly assume a is symmetric.
@@ -21,11 +23,17 @@ def symmetric_svd(a):
     # Q.T * mp.diag(ev) * Q == B
     ev, Q = mp.eigsy(B)
 
+    Qmat = [[Q[j, i] for j in range(2 * n)] for i in range(2 * n)]
     Umat = [[0 for _ in range(n)] for _ in range(n)]
+    vs = []
+
+    for vQ in Qmat:
+        if all(abs(abs(vQ[n]) - abs(v[0])) > EPS for v in vs):
+            vs.append(vQ)
 
     for i in range(n):
         for j in range(n):
-            Umat[i][j] = Q[i, j] - 1j * Q[i + n, j]
+            Umat[i][j] = vs[j][i] - 1j * vs[j][i + n]
 
     Q = mp.matrix(Umat)
 

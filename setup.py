@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="takagi_fact",
-    version="0.1.2",
+    version="0.2.0",
     author="Hajime Fukuda",
     author_email="hajime.fukuda@me.com",
     description="A libary for the symmetric SVD and the Takagi factorization",
