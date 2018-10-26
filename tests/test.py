@@ -23,7 +23,7 @@ class TakagiTest(unittest.TestCase):
             self.assertAlmostEqual(unit[i, j], qdaq[i, j])
 
     def test_symmtric_svd(self):
-        N_REPEAT = 2
+        N_REPEAT = 1000
         N_DIM_UPPER = 2
 
         for _ in range(N_REPEAT):
@@ -46,7 +46,7 @@ class TakagiTest(unittest.TestCase):
                     self.assertAlmostEqual(unit[i, j], qdaq[i, j])
 
     def test_takagi_fact(self):
-        N_REPEAT = 100
+        N_REPEAT = 1000
         N_DIM_UPPER = 2
         for _ in range(N_REPEAT):
             for n in range(2, N_DIM_UPPER + 1):
