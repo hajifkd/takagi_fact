@@ -34,11 +34,8 @@ def symmetric_svd(a):
     for vQ in Qmat:
         if all(
                 # Requiring linear independence
-                not all(
-                    (approx_eq(vQ[n + i], v[i]) and approx_eq(vQ[i], -v[n + i])) or
-                        (approx_eq(vQ[n + i], -v[i]) and approx_eq(vQ[i], v[n + i]))
-                    for i in range(n)
-                    )
+                not (all(approx_eq(vQ[n + i], v[i]) and approx_eq(vQ[i], -v[n + i]) for i in range(n)) or
+                     all(approx_eq(vQ[n + i], -v[i]) and approx_eq(vQ[i], v[n + i]) for i in range(n)))
                 for v in vs
               ):
             vs.append(vQ)
