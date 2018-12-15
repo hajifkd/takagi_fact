@@ -29,16 +29,7 @@ def symmetric_svd(a):
 
     Qmat = [[Q[j, i] for j in range(2 * n)] for i in range(2 * n)]
     Umat = [[0 for _ in range(n)] for _ in range(n)]
-    vs = []
-
-    for vQ in Qmat:
-        if all(
-                # Requiring linear independence
-                not (all(approx_eq(vQ[n + i], v[i]) and approx_eq(vQ[i], -v[n + i]) for i in range(n)) or
-                     all(approx_eq(vQ[n + i], -v[i]) and approx_eq(vQ[i], v[n + i]) for i in range(n)))
-                for v in vs
-              ):
-            vs.append(vQ)
+    vs = [Qmat[i] for i, v in enumerate(ev) if v > 0]
 
     assert(len(vs) == n)
 
